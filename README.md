@@ -6,3 +6,4 @@ Esta carpeta contiene dos proyectos: un jax-ws, un ui-jsf y un script sql
 -- JDK 1.8
 -- JEE 7
 -- Netbeans 8.0.1
+-- http://localhost:8080/endpoints/endpoints?WSDL

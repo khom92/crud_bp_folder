@@ -4,6 +4,7 @@ import com.store.client.Cliente;
 import com.store.client.ClienteDto;
 import com.store.dao.Cliente_access;
 import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -21,8 +22,12 @@ public class ClienteBean extends BeanGeneric<Cliente> implements Serializable{
     
     @PostConstruct
     public void init () {
-         elementoent = new Cliente();
-         lista = Cliente_access.findAllCliente();
+        try {
+            elementoent = new Cliente();
+            lista = Cliente_access.findAllCliente();   
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
      
     @Override
@@ -36,26 +41,41 @@ public class ClienteBean extends BeanGeneric<Cliente> implements Serializable{
     }
     
     public void crear(){
-        ClienteDto cli = new ClienteDto();
-        cli.setNombres(elementoent.getNombres());
-        cli.setApellidos(elementoent.getApellidos());
-        Cliente_access.createClienteDto(cli);
+        try {
+            ClienteDto cli = new ClienteDto();
+            cli.setNombres(elementoent.getNombres());
+            cli.setApellidos(elementoent.getApellidos());
+            Cliente_access.createClienteDto(cli);
+            lista = Cliente_access.findAllCliente();
+        } catch (Exception e) {
+             System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
     
     public void editar(){
-        ClienteDto cli = new ClienteDto();
-        cli.setNombres(elementoent.getNombres());
-        cli.setApellidos(elementoent.getApellidos());
-        cli.setIdCliente(elementoent.getIdCliente());
-        Cliente_access.editClienteDto(cli);
+        try {
+            ClienteDto cli = new ClienteDto();
+            cli.setNombres(elementoent.getNombres());
+            cli.setApellidos(elementoent.getApellidos());
+            cli.setIdCliente(elementoent.getIdCliente());
+            Cliente_access.editClienteDto(cli);
+            lista = Cliente_access.findAllCliente();
+        } catch (Exception e) {
+             System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
     
     public void eliminar(){
-        ClienteDto cli = new ClienteDto();
-        cli.setNombres(elementoent.getNombres());
-        cli.setApellidos(elementoent.getApellidos());
-        cli.setIdCliente(elementoent.getIdCliente());
-        Cliente_access.removeClienteDto(cli);
+        try {
+            ClienteDto cli = new ClienteDto();
+            cli.setNombres(elementoent.getNombres());
+            cli.setApellidos(elementoent.getApellidos());
+            cli.setIdCliente(elementoent.getIdCliente());
+            Cliente_access.removeClienteDto(cli);
+            lista = Cliente_access.findAllCliente();
+        } catch (Exception e) {
+             System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
     
     public void limpiarCliente(){

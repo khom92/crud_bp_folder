@@ -15,6 +15,7 @@ import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
+
 @WebService(serviceName = "endpoints")
 @Stateless()
 public class endpoints {
@@ -32,35 +33,52 @@ public class endpoints {
     @WebMethod(operationName = "create_cliente_dto")
     @Oneway
     public void createCliente(@WebParam(name = "cliente") ClienteDto cliente) {
-        Cliente cli = new Cliente();
-        cli.setNombres(cliente.getNombres());
-        cli.setApellidos(cliente.getApellidos());
-        ejbCliente.create(cli);
+        try {
+            Cliente cli = new Cliente();
+            cli.setNombres(cliente.getNombres());
+            cli.setApellidos(cliente.getApellidos());
+            ejbCliente.create(cli);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
     
     @WebMethod(operationName = "edit_cliente_dto")
     @Oneway
     public void editCliente(@WebParam(name = "cliente") ClienteDto cliente) {
-        Cliente cli = new Cliente();
-        cli.setNombres(cliente.getNombres());
-        cli.setApellidos(cliente.getApellidos());
-        cli.setIdCliente(cliente.getIdCliente());
-        ejbCliente.edit(cli);
+        try {
+            Cliente cli = new Cliente();
+            cli.setNombres(cliente.getNombres());
+            cli.setApellidos(cliente.getApellidos());
+            cli.setIdCliente(cliente.getIdCliente());
+            ejbCliente.edit(cli);
+         } catch (Exception e) {
+            System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
     
     @WebMethod(operationName = "remove_cliente_dto")
     @Oneway
     public void removeCliente(@WebParam(name = "cliente") ClienteDto cliente) {
-        Cliente cli = new Cliente();
-        cli.setNombres(cliente.getNombres());
-        cli.setApellidos(cliente.getApellidos());
-        cli.setIdCliente(cliente.getIdCliente());
-        ejbCliente.remove(cli);
+        try {
+            Cliente cli = new Cliente();
+            cli.setNombres(cliente.getNombres());
+            cli.setApellidos(cliente.getApellidos());
+            cli.setIdCliente(cliente.getIdCliente());
+            ejbCliente.remove(cli);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+        }
     }
 
     @WebMethod(operationName = "findAll_cliente")
     public List<Cliente> findAllCliente() {
-        return ejbCliente.findAll();
+        try {
+            return ejbCliente.findAll();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace()[0].getMethodName()+e.getStackTrace()[0].getLineNumber()+e.getMessage());
+            return null;
+        }
     }
     
     
